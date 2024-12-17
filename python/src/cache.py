@@ -47,7 +47,7 @@ class Cache:
                 # Add it to the temp buffer
                 self.temp_buffer[key] = None  # Placeholder, we don't need value here
                 # If the temp buffer exceeds size N, evict the least recently used item
-                if len(self.temp_buffer) > self.N:
+                if len(self.temp_buffer) > 1:
                     self.temp_buffer.popitem(last=False)
                 return value
             else:
