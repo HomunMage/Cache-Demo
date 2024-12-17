@@ -8,6 +8,7 @@ class Cache:
         N: The maximum size of the LRU cache and temp buffer.
         """
         self.N = N  # Cache size
+        self.N_T = 1  # buffer size
         self.lru_cache = OrderedDict()  # The actual LRU cache, stores <key, value>
         self.temp_buffer = OrderedDict()  # Temporary buffer, stores <key, None>
 
@@ -47,7 +48,7 @@ class Cache:
                 # Add it to the temp buffer
                 self.temp_buffer[key] = None  # Placeholder, we don't need value here
                 # If the temp buffer exceeds size N, evict the least recently used item
-                if len(self.temp_buffer) > 1:
+                if len(self.temp_buffer) > self.N_T:
                     self.temp_buffer.popitem(last=False)
                 return value
             else:
