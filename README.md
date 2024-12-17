@@ -26,7 +26,7 @@ and this work is using ChatGPT to support coding and code review, this is the [c
 
 ## Run the scripts:
 
-I use PostgreSQL to make internal communication and  disk fetching for measure speed.
+I use PostgreSQL to sim internal communication and disk fetching for measure speed.
 
 * env build
     ```
