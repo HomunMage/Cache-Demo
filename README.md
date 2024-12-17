@@ -1,32 +1,23 @@
 # MammothCyber_TH
 
 
+## Run the scripts:
 
-```
-docker compose build
-docker compose up -d
-docker compose exec py2db python app.py
-docker compose exec py2db python create.py
-docker compose exec py2db python add.py
-docker compose exec py2db python print_all.py
-```
+* env build
+    ```
+    docker compose build
+    docker compose up -d
+    docker compose exec py2db python library_create.py
+    docker compose exec py2db python library_add.py
+    ```
+* running cache demo
+    ```
+    docker compose exec py2db python demo_cache.py
+    ```
 
-## Scenario: Library Management System
+## Explanation
 
-This scenario creates a simple library management system with tables for authors, books, members, and borrowing history. It provides a basic structure for managing library data.
+Our core design is at cache.py
 
-```
-docker compose exec py2db python library/create_library.py
-docker compose exec py2db python library/data_insertion.py
-docker compose exec py2db python library/top5.py
-```
+that there are 2 local var
 
-## Scenario: E-Commerce Database for a Company
-
-This scenario simulates an e-commerce platform with customers, orders, products, payments, and reviews. It allows you to manage orders, products, customer details, and payments.
-
-```
-docker compose exec py2db python eCommerce/create_store.py
-docker compose exec py2db python eCommerce/data_insertion.py
-docker compose exec py2db python eCommerce/query.py
-```
