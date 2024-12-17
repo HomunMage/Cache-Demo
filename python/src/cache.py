@@ -9,7 +9,7 @@ class Cache:
         """
         self.N = N  # Cache size
         self.lru_cache = OrderedDict()  # The actual LRU cache, stores <key, value>
-        self.temp_buffer = set()  # Temporary buffer, stores keys that have been accessed once
+        self.temp_buffer = OrderedDict()  # Temporary buffer, stores <key, None>
 
     def _move_to_lru_cache(self, key, value):
         """Move an item from the temp buffer to the LRU cache."""
@@ -38,14 +38,17 @@ class Cache:
                 value = fetch_function(key)
                 self._move_to_lru_cache(key, value)
                 # Once moved to LRU, we don't need the key in the temp buffer anymore
-                self.temp_buffer.remove(key)
+                del self.temp_buffer[key]
                 return value
         else:
             # Step 3: If key is not in either, fetch the data (e.g., from database)
             if fetch_function:
                 value = fetch_function(key)
                 # Add it to the temp buffer
-                self.temp_buffer.add(key)
+                self.temp_buffer[key] = None  # Placeholder, we don't need value here
+                # If the temp buffer exceeds size N, evict the least recently used item
+                if len(self.temp_buffer) > self.N:
+                    self.temp_buffer.popitem(last=False)
                 return value
             else:
                 # If no fetch function is provided, return None or raise an error
