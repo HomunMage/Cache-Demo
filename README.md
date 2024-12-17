@@ -4,11 +4,7 @@
 
 The core design of our cache implementation is located in [`cache.py`](/python/src/cache.py). 
 
-I use the Least Recently Used (LRU) algorithm as the cache eviction policy. To meet the requirement:
-
-```
-5. Only consecutive cache hits (2 or more times) are counted as "being used."
-```
+I use the Least Recently Used (LRU) algorithm as the cache eviction policy.
 
 I use two local variables:
 
@@ -17,6 +13,12 @@ I use two local variables:
 
 - When a key is accessed for the first time, it is added to `temp_buffer` means an initial counter value of 1.
 - If the key is accessed again (i.e., it's a "being used"), the key is removed from `temp_buffer` and inserted into the head of `lru_cache` with its associated value.
+
+due to 
+```
+5. Only consecutive cache hits (2 or more times) are counted as "being used."
+```
+so, the temp_buffer size set to 1. (That can be extend to more if needed)
 
 This mechanism ensures that only keys with consecutive hits are promoted to the main cache.
 
