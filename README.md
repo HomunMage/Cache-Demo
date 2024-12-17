@@ -1,4 +1,4 @@
-# MammothCyber_TH
+# MCyber_TH
 
 ## Explanation
 
